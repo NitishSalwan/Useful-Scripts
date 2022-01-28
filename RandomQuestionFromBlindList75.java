@@ -6,12 +6,17 @@
 package blindList;
 
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class RandomQuestionFromBlindList75 {
 	
-  //75 question list from https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
-  ArrayList<String> questionsLinks = new ArrayList<String>(
+	//75 question list from https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
+    ArrayList<String> questionsLinks = new ArrayList<String>(
             Arrays.asList("https://leetcode.com/problems/two-sum/",
             		"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
             		"https://leetcode.com/problems/contains-duplicate/",
@@ -89,14 +94,79 @@ public class RandomQuestionFromBlindList75 {
             		"https://leetcode.com/problems/top-k-frequent-elements/",
             		"https://leetcode.com/problems/find-median-from-data-stream/"));
 	
-    public String giveMeAQuestion() {
-    	int questionNumber = (int) (questionsLinks.size() * Math.random());
-		  return questionsLinks.get(questionNumber);
+    ArrayList<String> unAttemptedQuestions = new ArrayList<String>();
+    
+    RandomQuestionFromBlindList75() {
+    	InitializeSetup();
+    }
+    
+    void InitializeSetup() { 
+    	File unAttemptedFile = new File("unAttemptedFile.txt");
+    	if (!unAttemptedFile.exists()){
+    	    try {
+    	    	unAttemptedFile.createNewFile();
+    	       	FileWriter writer = new FileWriter("unAttemptedFile.txt"); 
+    	    	for(String str: questionsLinks) {
+    	    	  writer.write(str + System.lineSeparator());
+    	    	}
+    	    	writer.close();
+    	    	unAttemptedQuestions = new ArrayList<String>(questionsLinks);
+    	    } catch (IOException e) {
+    	        System.out.println("An error occurred in initializing storage.");
+    	        e.printStackTrace();
+    	    }
+    	} else {
+    		BufferedReader reader;
+    		try {
+    			reader = new BufferedReader(new FileReader(
+    					"unAttemptedFile.txt"));
+    			String line;
+    			do {
+    				line = reader.readLine();
+    				if (line != null)
+    				unAttemptedQuestions.add(line);
+    			} while(line!=null);
+    			reader.close();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
+    }
+    
+    public void giveMeAQuestion() {
+    	if (unAttemptedQuestions.size() < 1) {
+    		System.out.println("Congratulations!! You have attempted the whole list.");
+    	}
+    	int questionNumber = (int) (unAttemptedQuestions.size() * Math.random());
+		String questionLink = questionsLinks.get(questionNumber);
+		unAttemptedQuestions.remove(questionNumber);
+		
+	    try {
+	    	File myFile = new File("unAttemptedFile.txt");
+	    	myFile.delete();
+	    	myFile.createNewFile();
+	       	FileWriter writer = new FileWriter("unAttemptedFile.txt"); 
+	    	for(String str: unAttemptedQuestions) {
+	    	  writer.write(str + System.lineSeparator());
+	    	}
+	    	writer.close();
+	    } catch (IOException e) {
+	        System.out.println("An error occurred in initializing storage.");
+	        e.printStackTrace();
+	    }
+	    
+		System.out.println("Here is your Question : " + questionLink);
+		System.out.println(unAttemptedQuestions.size() + " more to go :-)");
     }
     
 	public static void main(String[] args) {
 		RandomQuestionFromBlindList75 ob1 = new RandomQuestionFromBlindList75();
-		System.out.print(ob1.giveMeAQuestion());
+        System.out.println("Press Enter key to get a question from Blind List...");
+        try
+        {
+        	System.in.read();
+        	ob1.giveMeAQuestion();
+        }  
+        catch(Exception e){}
 	}
-	
 }
