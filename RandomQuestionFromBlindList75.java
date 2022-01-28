@@ -1,6 +1,9 @@
 /*
+  75 question list from https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
   Original link categorized blind list 75 questions conceptwise.
   This program will provide link for a random question from that list without specifying topic name.
+  It will always provide an unattempted question everytime along with remaining unattempted question from the list.
+  So that we can keep record of our progress.
   Feel free to add more questions to it.
 */
 package blindList;
@@ -14,8 +17,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class RandomQuestionFromBlindList75 {
-	
-	//75 question list from https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
     ArrayList<String> questionsLinks = new ArrayList<String>(
             Arrays.asList("https://leetcode.com/problems/two-sum/",
             		"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
