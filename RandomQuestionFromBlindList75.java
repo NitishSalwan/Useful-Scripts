@@ -116,47 +116,45 @@ public class RandomQuestionFromBlindList75 {
     	        e.printStackTrace();
     	    }
     	} else {
-    		BufferedReader reader;
-    		try {
-    			reader = new BufferedReader(new FileReader(
-    					"unAttemptedFile.txt"));
-    			String line;
-    			do {
-    				line = reader.readLine();
-    				if (line != null)
-    				unAttemptedQuestions.add(line);
-    			} while(line!=null);
-    			reader.close();
-    		} catch (IOException e) {
-    			e.printStackTrace();
-    		}
+    	    BufferedReader reader;
+    	    try {
+                reader = new BufferedReader(new FileReader("unAttemptedFile.txt"));
+    		String line;
+    		do {
+    		    line = reader.readLine();
+    		    if (line != null) unAttemptedQuestions.add(line);
+    		} while(line!=null);
+    		reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+    	    }
     	}
     }
     
     public void giveMeAQuestion() {
     	if (unAttemptedQuestions.size() < 1) {
-    		System.out.println("Congratulations!! You have attempted the whole list.");
+    	    System.out.println("Congratulations!! You have attempted the whole list.");
     	}
     	int questionNumber = (int) (unAttemptedQuestions.size() * Math.random());
-		String questionLink = questionsLinks.get(questionNumber);
-		unAttemptedQuestions.remove(questionNumber);
+	String questionLink = questionsLinks.get(questionNumber);
+	unAttemptedQuestions.remove(questionNumber);
 		
-	    try {
-	    	File myFile = new File("unAttemptedFile.txt");
-	    	myFile.delete();
-	    	myFile.createNewFile();
-	       	FileWriter writer = new FileWriter("unAttemptedFile.txt"); 
-	    	for(String str: unAttemptedQuestions) {
-	    	  writer.write(str + System.lineSeparator());
-	    	}
-	    	writer.close();
-	    } catch (IOException e) {
-	        System.out.println("An error occurred in initializing storage.");
-	        e.printStackTrace();
+	try {
+	    File myFile = new File("unAttemptedFile.txt");
+	    myFile.delete();
+	    myFile.createNewFile();
+	    FileWriter writer = new FileWriter("unAttemptedFile.txt"); 
+	    for(String str: unAttemptedQuestions) {
+	        writer.write(str + System.lineSeparator());
 	    }
+	    writer.close();
+	} catch (IOException e) {
+	    System.out.println("An error occurred in initializing storage.");
+	    e.printStackTrace();
+	}
 	    
-		System.out.println("Here is your Question : " + questionLink);
-		System.out.println(unAttemptedQuestions.size() + " more to go :-)");
+	System.out.println("Here is your Question : " + questionLink);
+	System.out.println(unAttemptedQuestions.size() + " more to go :-)");
     }
     
     public static void main(String[] args) {
