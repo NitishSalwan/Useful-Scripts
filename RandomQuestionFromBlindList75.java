@@ -2,9 +2,8 @@
   75 question list from https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
   Original link categorized blind list 75 questions conceptwise.
   This program will provide link for a random question from that list without specifying topic name.
-  It will always provide an unattempted question everytime along with remaining unattempted question from the list.
-  So that we can keep record of our progress.
-  Feel free to add more questions to it.
+  It will always provide an unattempted question everytime along with remaining unattempted question from the list. So that we can keep record of our progress.
+  Currrent implementation is very inefficient.
 */
 package blindList;
 
