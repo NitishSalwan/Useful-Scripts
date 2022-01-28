@@ -159,14 +159,12 @@ public class RandomQuestionFromBlindList75 {
 		System.out.println(unAttemptedQuestions.size() + " more to go :-)");
     }
     
-	public static void main(String[] args) {
-		RandomQuestionFromBlindList75 ob1 = new RandomQuestionFromBlindList75();
+    public static void main(String[] args) {
+	RandomQuestionFromBlindList75 ob1 = new RandomQuestionFromBlindList75();
         System.out.println("Press Enter key to get a question from Blind List...");
-        try
-        {
-        	System.in.read();
-        	ob1.giveMeAQuestion();
-        }  
-        catch(Exception e){}
-	}
+        try{
+            System.in.read();
+            ob1.giveMeAQuestion();
+        } catch(Exception e){}
+    }
 }
