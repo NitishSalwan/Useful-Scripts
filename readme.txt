@@ -1,5 +1,6 @@
-Syntax : scriptname  latency Target_Serveraddress Time_to_ping Your_emailid
+monitor_p_mail.pl Usage:
 
+Syntax : scriptname  latency Target_Serveraddress Time_to_ping Your_emailid
 
 Example :
 
